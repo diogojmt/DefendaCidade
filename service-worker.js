@@ -1,21 +1,21 @@
 const cacheName = 'defense-tower-game-v1';
 const cacheAssets = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/icons/bombardeio_192.png',
-    '/icons/bombardeio_512.png',	// Exemplo de ícone
-    '/sounds/Sirene.mp3',  // Exemplo de som
-    '/sounds/Radio.mp3',
-    '/sounds/Disparo.mp3',
-    '/sounds/Explosao.mp3',
-    '/sounds/Inimigo_base.mp3',
-    '/sounds/Destrocos1.mp3',
-    '/sounds/Destrocos2.mp3',
-    '/sounds/Destrocos3.mp3',
-    '/sounds/Destrocos4.mp3',
-    '/manifest.json'
+    './',  // Refere-se ao index.html
+    './index.html',
+    './styles.css',
+    './script.js',
+    './icons/bombardeio_192.png',
+    './icons/bombardeio_512.png',
+    './sounds/Sirene.mp3',
+    './sounds/Radio.mp3',
+    './sounds/Disparo.mp3',
+    './sounds/Explosao.mp3',
+    './sounds/Inimigo_base.mp3',
+    './sounds/Destrocos1.mp3',
+    './sounds/Destrocos2.mp3',
+    './sounds/Destrocos3.mp3',
+    './sounds/Destrocos4.mp3',
+    './manifest.json'
 ];
 
 // Instalando o Service Worker e adicionando os recursos ao cache
