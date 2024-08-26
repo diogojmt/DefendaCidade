@@ -4,16 +4,17 @@ const cacheAssets = [
     '/index.html',
     '/styles.css',
     '/script.js',
-    '/icons/icon.png',  // Exemplo de ícone
-    '/sounds/sirene.mp3',  // Exemplo de som
-    '/sounds/radio.mp3',
-    '/sounds/disparo.mp3',
-    '/sounds/explosao.mp3',
-    '/sounds/inimigo_base.mp3',
-    '/sounds/destrocos1.mp3',
-    '/sounds/destrocos2.mp3',
-    '/sounds/destrocos3.mp3',
-    '/sounds/destrocos4.mp3',
+    '/icons/bombardeio_192.png',
+    '/icons/bombardeio_512.png',	// Exemplo de ícone
+    '/sounds/Sirene.mp3',  // Exemplo de som
+    '/sounds/Radio.mp3',
+    '/sounds/Disparo.mp3',
+    '/sounds/Explosao.mp3',
+    '/sounds/Inimigo_base.mp3',
+    '/sounds/Destrocos1.mp3',
+    '/sounds/Destrocos2.mp3',
+    '/sounds/Destrocos3.mp3',
+    '/sounds/Destrocos4.mp3',
     '/manifest.json'
 ];
 
