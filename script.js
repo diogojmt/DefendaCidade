@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const playButton = document.getElementById('play-button');
     const pauseButton = document.getElementById('pause-button');
     const buildingsDisplay = document.getElementById('buildings');
+    let towers = document.querySelectorAll('.tower');
+    let towersRemaining = towers.length;
 
     if (!scoreDisplay || !stageDisplay || !buildingsDisplay) {
         console.error('Elementos de pontuação, estágio ou prédios restantes não foram encontrados no DOM.');
@@ -45,12 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
         buildingsDisplay.textContent = `Buildings Remaining: ${buildingsRemaining}`;
     }
 
+    function updateTowers() {
+        towersRemaining = document.querySelectorAll('.tower').length;
+    }
+
     // Função que verifica o fim do jogo
     function checkGameOver() {
         if (buildingsRemaining <= 0) {
             pauseGame(); // Pausar o jogo
             alert('Game Over! All buildings have been destroyed.'); // Exibir mensagem de fim de jogo
-            // Aqui você pode adicionar lógica para reiniciar o jogo ou exibir a pontuação final
+        } else if (towersRemaining <= 0) {
+            pauseGame();
+            alert('Game Over! All towers have been destroyed.'); // Exibir mensagem de fim de jogo
         }
     }
 
@@ -110,8 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    function shootProjectile(targetX, targetY) {
-        const cannon = document.getElementById('cannon');
+    function shootProjectileFromTower(tower, targetX, targetY) {
+        const cannon = tower.querySelector('.cannon');
+        
+        // Verifica se o canhão existe antes de prosseguir
+        if (!cannon) {
+            console.error('Cannon not found in tower:', tower);
+            return;
+        }
+
         const projectile = document.createElement('div');
         projectile.classList.add('projectile');
 
@@ -171,7 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetX = event.clientX - rect.left;
         const targetY = event.clientY - rect.top;
 
-        shootProjectile(targetX, targetY);
+        // Disparar projéteis de todas as torres
+        towers.forEach(tower => {
+            shootProjectileFromTower(tower, targetX, targetY);
+        });
     });
 
     function createEnemy() {
@@ -195,15 +213,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentY = parseFloat(enemy.style.top);
             enemy.style.top = `${currentY + enemySpeed}px`; // Velocidade do inimigo aumenta conforme o estágio
 
-            document.querySelectorAll('.building, .house, .church').forEach((element) => {
+            document.querySelectorAll('.building, .house, .church, .tower').forEach((element) => {
                 if (isCollision(enemy, element)) {
                     const rect = element.getBoundingClientRect();
                     triggerExplosion(rect);
                     element.remove();
                     triggerFire(rect);
                     enemy.remove();
-                    buildingsRemaining -= 1; // Reduz um prédio quando é destruído
-                    updateBuildings(); // Atualiza o display de prédios restantes
+                    if (element.classList.contains('tower')) {
+                        updateTowers(); // Atualiza a contagem de torres restantes
+                    } else {
+                        buildingsRemaining -= 1; // Reduz um prédio quando é destruído
+                        updateBuildings(); // Atualiza o display de prédios restantes
+                    }
                     checkGameOver(); // Verifica se o jogo acabou
                 }
             });
@@ -318,17 +340,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			smoke.style.top = `${parseFloat(enemy.style.top) + enemy.clientHeight}px`;
 			gameArea.appendChild(smoke);
 
-			// Remover as partículas após um curto período
+			// Remover faíscas e fumaça após 300ms
 			setTimeout(() => {
-				if (spark.parentNode) {
-					spark.remove();
-				}
-				if (smoke.parentNode) {
-					smoke.remove();
-				}
-			}, 500);  // Reduzido para 500ms para diminuir o tempo de exibição
-		}, 200);  // Aumentado para 200ms para reduzir a frequência de criação
-				  
+				spark.remove();
+				smoke.remove();
+			}, 300);
+
+		}, 200);  // Intervalo de criação de rastro
+
 		// Limpar o intervalo quando a bomba for removida
 		enemy.addEventListener('remove', () => {
 			clearInterval(trailInterval);
@@ -373,11 +392,12 @@ document.addEventListener('DOMContentLoaded', () => {
         element.appendChild(door);
     });
 
-    // Adicionar janelas à torre
-    const tower = document.getElementById('tower');
-    const towerWindow = document.createElement('div');
-    towerWindow.classList.add('window');
-    tower.appendChild(towerWindow);
+    // Adicionar janelas às torres
+    towers.forEach(tower => {
+        const towerWindow = document.createElement('div');
+        towerWindow.classList.add('window');
+        tower.appendChild(towerWindow);
+    });
 
     // Atualizar a pontuação, o estágio e os prédios restantes na interface
     updateScore();

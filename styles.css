@@ -15,37 +15,23 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%; /* Garante que o contêiner ocupe toda a largura do game-area */
+    width: 100%;
     position: absolute;
     top: 10px;
     left: 0;
-    padding: 0 10px; /* Mantém o padding das laterais */
+    padding: 0 10px;
     box-sizing: border-box;
     z-index: 20;
     text-align: center;
 }
 
 #score, #stage, #buildings {
-    flex: 1; /* Cada elemento ocupa o mesmo espaço horizontal */
-    font-size: 1.5vw; /* Ajusta o tamanho da fonte */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    flex: 1;
+    font-size: 1.5vw;
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 5px 10px;
     border-radius: 5px;
     color: white;
-}
-
-#score, #stage {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 20px;
-    color: white;
-    z-index: 20;
-}
-
-#stage {
-    left: auto;
-    right: 10px;
 }
 
 #controls {
@@ -73,10 +59,10 @@ button:active {
 
 #game-area {
     position: relative;
-    width: 90vw; /* Ajusta a largura para 90% da largura da tela */
-    max-width: 800px; /* Máximo de 800px para telas maiores */
-    height: 90vh; /* Ajusta a altura para 90% da altura da tela */
-    max-height: 600px; /* Máximo de 600px para telas maiores */
+    width: 90vw;
+    max-width: 800px;
+    height: 90vh;
+    max-height: 600px;
     background-color: #000;
     border: 2px solid #fff;
     overflow: hidden;
@@ -84,8 +70,8 @@ button:active {
 
 /* Ajuste para os elementos dentro do game-area */
 .enemy, .explosion, .fire, .spark, .spark-trail, .smoke-trail {
-    max-width: 100%;  /* Garante que os elementos não ultrapassem as bordas laterais */
-    max-height: 100%; /* Garante que os elementos não ultrapassem as bordas superiores e inferiores */
+    max-width: 100%;
+    max-height: 100%;
 }
 
 #base {
@@ -101,8 +87,8 @@ button:active {
     position: absolute;
     width: 80px;
     height: 120px;
-    background-color: #888; /* Cinza para prédios */
-    border: 2px solid #555; /* Bordas escuras */
+    background-color: #888;
+    border: 2px solid #555;
     box-shadow: 0 0 10px #222;
 }
 
@@ -126,8 +112,8 @@ button:active {
     position: absolute;
     width: 60px;
     height: 60px;
-    background-color: #FF6347; /* Tomate para as casas */
-    border: 2px solid #555; /* Bordas escuras */
+    background-color: #FF6347;
+    border: 2px solid #555;
     box-shadow: 0 0 10px #222;
 }
 
@@ -146,8 +132,8 @@ button:active {
     position: absolute;
     width: 50px;
     height: 100px;
-    background-color: #FFD700; /* Dourado para igreja */
-    border: 2px solid #555; /* Bordas escuras */
+    background-color: #FFD700;
+    border: 2px solid #555;
     border-radius: 10px;
     box-shadow: 0 0 10px #222;
 }
@@ -161,7 +147,7 @@ button:active {
 .fence {
     position: absolute;
     height: 10px;
-    background-color: #8B4513; /* Marrom para cercado */
+    background-color: #8B4513;
     z-index: 4;
 }
 
@@ -180,15 +166,15 @@ button:active {
 /* Janelas e Portas */
 .window, .door {
     position: absolute;
-    background-color: #FFF; /* Branco para janelas e portas */
+    background-color: #FFF;
 }
 
 /* Janelas para prédios */
 .building .window {
     width: 15px;
     height: 15px;
-    background-color: #FFF; /* Branco para janelas */
-    border: 2px solid #555; /* Bordas escuras para dar destaque */
+    background-color: #FFF;
+    border: 2px solid #555;
 }
 
 #hangar .window {
@@ -210,8 +196,8 @@ button:active {
 .building .door {
     width: 20px;
     height: 30px;
-    background-color: #FFF; /* Branco para portas */
-    border: 2px solid #555; /* Bordas escuras para dar destaque */
+    background-color: #FFF;
+    border: 2px solid #555;
 }
 
 #hangar .door {
@@ -233,15 +219,15 @@ button:active {
 .house .window {
     width: 10px;
     height: 10px;
-    background-color: #FFF; /* Branco para janelas */
-    border: 2px solid #555; /* Bordas escuras para dar destaque */
+    background-color: #FFF;
+    border: 2px solid #555;
 }
 
 .house .door {
     width: 15px;
     height: 25px;
-    background-color: #FFF; /* Branco para portas */
-    border: 2px solid #555; /* Bordas escuras para dar destaque */
+    background-color: #FFF;
+    border: 2px solid #555;
 }
 
 #house1 .window {
@@ -269,60 +255,61 @@ button:active {
     height: 30px;
     left: 17px;
     bottom: 10px;
-    background-color: #FFF; /* Branco para portas */
-    border: 2px solid #555; /* Bordas escuras para dar destaque */
+    background-color: #FFF;
+    border: 2px solid #555;
 }
 
 /* Torre medieval */
-#tower {
+.tower {
     position: absolute;
-    bottom: 150px; /* Acima da base */
-    left: 50%;
-    transform: translateX(-50%);
     width: 50px;
-    height: 120px;
-    background-color: #555; /* Cinza escuro para o corpo da torre */
-    border: 3px solid #333; /* Bordas mais escuras */
+    height: 100px;
+    background-color: #555;
+    border: 3px solid #333;
     border-radius: 5px;
-    transform-origin: bottom center;
     box-shadow: 0 0 10px #000;
 }
 
-#tower:before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 0;
-    right: 0;
-    height: 20px;
-    background-color: #555; /* Parte superior da torre */
-    border: 3px solid #333;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    box-shadow: 0 -5px 10px #000;
-}
-
-/* Janelas na torre */
-#tower .window {
-    width: 10px;
-    height: 15px;
-    background-color: #FFF; /* Janelas brancas */
-    position: absolute;
-    top: 30px;
+#tower-main {
+    bottom: 150px;
     left: 50%;
     transform: translateX(-50%);
-    border: 2px solid #333;
+}
+
+#tower-left {
+    bottom: 150px;
+    left: 25%;
+    transform: translateX(-50%);
+}
+
+#tower-right {
+    bottom: 150px;
+    left: 75%;
+    transform: translateX(-50%);
+}
+
+/* Canhões */
+.cannon {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    z-index: 11; /* Garante que o canhão esteja acima da torre */
 }
 
 /* Projétil circular, piscante, e com tamanhos variados */
 .projectile {
     position: absolute;
-    width: 10px;  /* Tamanho visível */
-    height: 10px; /* Tamanho visível */
-    background-color: #FFD700;  /* Cor dourada para ser visível */
-    border-radius: 50%;  /* Forma circular */
-    box-shadow: 0 0 10px #FFD700; /* Brilho para destacar o projétil */
-    z-index: 10;  /* Garante que esteja acima de outros elementos */
+    width: 10px;
+    height: 10px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FFD700;
+    z-index: 10;
 }
 
 @keyframes blink {
@@ -394,7 +381,7 @@ button:active {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: rgba(105,105,105,0.5); /* Cinza para a fumaça */
+    background-color: rgba(105,105,105,0.5);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9;
@@ -417,9 +404,9 @@ button:active {
     position: absolute;
     width: 80px;
     height: 80px;
-    background-color: #FF4500; /* Chamas */
+    background-color: #FF4500;
     border-radius: 50%;
-    box-shadow: 0 0 40px #FFD700; /* Clarão aumentado */
+    box-shadow: 0 0 40px #FFD700;
     pointer-events: none;
     z-index: 10;
     animation: explode 0.3s ease-out;
@@ -500,50 +487,5 @@ button:active {
     100% {
         transform: translate(20px, -50px) scale(0.5);
         opacity: 0;
-    }
-}
-
-/* Efeito de névoa aprimorado */
-.fog-layer {
-    position: absolute;
-    width: 120%;  /* Um pouco mais largo que a tela para permitir o movimento */
-    height: 100%;
-    top: 0;
-    background: rgba(169, 169, 169, 0.1); /* Cinza claro e semitransparente */
-    pointer-events: none;
-    z-index: 8;
-    animation: fogMove 30s linear infinite; /* Movimenta a névoa horizontalmente */
-}
-
-.fog-layer:nth-child(2) {
-    background: rgba(169, 169, 169, 0.05); /* Camada de névoa mais leve */
-    animation: fogMove2 50s linear infinite; /* Movimenta a névoa a uma velocidade diferente */
-}
-
-@keyframes fogMove {
-    0% {
-        transform: translateX(0);
-        opacity: 0.1;
-    }
-    50% {
-        opacity: 0.15; /* Varia a opacidade no meio do movimento */
-    }
-    100% {
-        transform: translateX(-20%);
-        opacity: 0.1;
-    }
-}
-
-@keyframes fogMove2 {
-    0% {
-        transform: translateX(-10%);
-        opacity: 0.05;
-    }
-    50% {
-        opacity: 0.1;
-    }
-    100% {
-        transform: translateX(10%);
-        opacity: 0.05;
     }
 }
