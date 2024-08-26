@@ -1,0 +1,549 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #222; /* Fundo preto para um visual retrô */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Garante que o contêiner ocupe toda a largura do game-area */
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 10px; /* Mantém o padding das laterais */
+    box-sizing: border-box;
+    z-index: 20;
+    text-align: center;
+}
+
+#score, #stage, #buildings {
+    flex: 1; /* Cada elemento ocupa o mesmo espaço horizontal */
+    font-size: 1.5vw; /* Ajusta o tamanho da fonte */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+#score, #stage {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    color: white;
+    z-index: 20;
+}
+
+#stage {
+    left: auto;
+    right: 10px;
+}
+
+#controls {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Verde sólido para os botões */
+    color: white;
+}
+
+button:active {
+    background-color: #45a049;
+}
+
+#game-area {
+    position: relative;
+    width: 90vw; /* Ajusta a largura para 90% da largura da tela */
+    max-width: 800px; /* Máximo de 800px para telas maiores */
+    height: 90vh; /* Ajusta a altura para 90% da altura da tela */
+    max-height: 600px; /* Máximo de 600px para telas maiores */
+    background-color: #000;
+    border: 2px solid #fff;
+    overflow: hidden;
+}
+
+/* Ajuste para os elementos dentro do game-area */
+.enemy, .explosion, .fire, .spark, .spark-trail, .smoke-trail {
+    max-width: 100%;  /* Garante que os elementos não ultrapassem as bordas laterais */
+    max-height: 100%; /* Garante que os elementos não ultrapassem as bordas superiores e inferiores */
+}
+
+#base {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    background-color: #444; /* Cinza escuro para a base */
+}
+
+/* Prédios */
+.building {
+    position: absolute;
+    width: 80px;
+    height: 120px;
+    background-color: #888; /* Cinza para prédios */
+    border: 2px solid #555; /* Bordas escuras */
+    box-shadow: 0 0 10px #222;
+}
+
+#hangar {
+    left: 100px;
+    bottom: 0;
+}
+
+#building1 {
+    left: 300px;
+    bottom: 0;
+}
+
+#building2 {
+    left: 500px;
+    bottom: 0;
+}
+
+/* Casas */
+.house {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: #FF6347; /* Tomate para as casas */
+    border: 2px solid #555; /* Bordas escuras */
+    box-shadow: 0 0 10px #222;
+}
+
+#house1 {
+    left: 200px;
+    bottom: 0;
+}
+
+#house2 {
+    left: 400px;
+    bottom: 0;
+}
+
+/* Igreja */
+.church {
+    position: absolute;
+    width: 50px;
+    height: 100px;
+    background-color: #FFD700; /* Dourado para igreja */
+    border: 2px solid #555; /* Bordas escuras */
+    border-radius: 10px;
+    box-shadow: 0 0 10px #222;
+}
+
+#church {
+    left: 600px;
+    bottom: 0;
+}
+
+/* Cercados */
+.fence {
+    position: absolute;
+    height: 10px;
+    background-color: #8B4513; /* Marrom para cercado */
+    z-index: 4;
+}
+
+#fence1 {
+    left: 85px;
+    bottom: 50px;
+    width: 110px;
+}
+
+#fence2 {
+    left: 385px;
+    bottom: 50px;
+    width: 90px;
+}
+
+/* Janelas e Portas */
+.window, .door {
+    position: absolute;
+    background-color: #FFF; /* Branco para janelas e portas */
+}
+
+/* Janelas para prédios */
+.building .window {
+    width: 15px;
+    height: 15px;
+    background-color: #FFF; /* Branco para janelas */
+    border: 2px solid #555; /* Bordas escuras para dar destaque */
+}
+
+#hangar .window {
+    left: 30px;
+    top: 30px;
+}
+
+#building1 .window {
+    left: 30px;
+    top: 30px;
+}
+
+#building2 .window {
+    left: 30px;
+    top: 30px;
+}
+
+/* Portas para prédios */
+.building .door {
+    width: 20px;
+    height: 30px;
+    background-color: #FFF; /* Branco para portas */
+    border: 2px solid #555; /* Bordas escuras para dar destaque */
+}
+
+#hangar .door {
+    left: 30px;
+    bottom: 10px;
+}
+
+#building1 .door {
+    left: 30px;
+    bottom: 10px;
+}
+
+#building2 .door {
+    left: 30px;
+    bottom: 10px;
+}
+
+/* Janelas e portas para casas */
+.house .window {
+    width: 10px;
+    height: 10px;
+    background-color: #FFF; /* Branco para janelas */
+    border: 2px solid #555; /* Bordas escuras para dar destaque */
+}
+
+.house .door {
+    width: 15px;
+    height: 25px;
+    background-color: #FFF; /* Branco para portas */
+    border: 2px solid #555; /* Bordas escuras para dar destaque */
+}
+
+#house1 .window {
+    left: 10px;
+    top: 10px;
+}
+
+#house1 .door {
+    left: 20px;
+    bottom: 10px;
+}
+
+#house2 .window {
+    left: 10px;
+    top: 10px;
+}
+
+#house2 .door {
+    left: 20px;
+    bottom: 10px;
+}
+
+#church .door {
+    width: 15px;
+    height: 30px;
+    left: 17px;
+    bottom: 10px;
+    background-color: #FFF; /* Branco para portas */
+    border: 2px solid #555; /* Bordas escuras para dar destaque */
+}
+
+/* Torre medieval */
+#tower {
+    position: absolute;
+    bottom: 150px; /* Acima da base */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 120px;
+    background-color: #555; /* Cinza escuro para o corpo da torre */
+    border: 3px solid #333; /* Bordas mais escuras */
+    border-radius: 5px;
+    transform-origin: bottom center;
+    box-shadow: 0 0 10px #000;
+}
+
+#tower:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-color: #555; /* Parte superior da torre */
+    border: 3px solid #333;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 -5px 10px #000;
+}
+
+/* Janelas na torre */
+#tower .window {
+    width: 10px;
+    height: 15px;
+    background-color: #FFF; /* Janelas brancas */
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #333;
+}
+
+/* Projétil circular, piscante, e com tamanhos variados */
+.projectile {
+    position: absolute;
+    width: 10px;  /* Tamanho visível */
+    height: 10px; /* Tamanho visível */
+    background-color: #FFD700;  /* Cor dourada para ser visível */
+    border-radius: 50%;  /* Forma circular */
+    box-shadow: 0 0 10px #FFD700; /* Brilho para destacar o projétil */
+    z-index: 10;  /* Garante que esteja acima de outros elementos */
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
+
+/* Estilo das bombas flamejantes */
+.enemy {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(255,69,0,1) 0%, rgba(255,140,0,0.8) 40%, rgba(255,69,0,0) 70%);
+    border-radius: 50%;
+    z-index: 5;
+    animation: flameFlicker 0.5s infinite alternate, fall 2s linear infinite;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+}
+
+@keyframes flameFlicker {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(20px);
+    }
+}
+
+/* Rastro de faíscas */
+.spark-trail {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255,215,0,0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    animation: trailMove 0.5s infinite ease-out;
+}
+
+@keyframes trailMove {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(20px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Fumaça das bombas */
+.smoke-trail {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(105,105,105,0.5); /* Cinza para a fumaça */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9;
+    animation: smokeMove 1s infinite ease-out;
+}
+
+@keyframes smokeMove {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-30px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Explosões em chamas com clarão aumentado */
+.explosion {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #FF4500; /* Chamas */
+    border-radius: 50%;
+    box-shadow: 0 0 40px #FFD700; /* Clarão aumentado */
+    pointer-events: none;
+    z-index: 10;
+    animation: explode 0.3s ease-out;
+}
+
+@keyframes explode {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+/* Efeito de incêndio melhorado */
+.fire {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255,69,0,1) 0%, rgba(255,140,0,0.8) 40%, rgba(255,69,0,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9;
+    animation: flicker 0.4s infinite alternate, grow 0.7s infinite alternate, rise 1.5s infinite linear;
+    opacity: 0.9;
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.8;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.2) translateY(-5px);
+    }
+}
+
+@keyframes grow {
+    0% {
+        width: 50px;
+        height: 50px;
+    }
+    100% {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Partículas de faíscas */
+.spark {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255,215,0,0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    animation: sparkMove 1s infinite ease-out;
+}
+
+@keyframes sparkMove {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(20px, -50px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Efeito de névoa aprimorado */
+.fog-layer {
+    position: absolute;
+    width: 120%;  /* Um pouco mais largo que a tela para permitir o movimento */
+    height: 100%;
+    top: 0;
+    background: rgba(169, 169, 169, 0.1); /* Cinza claro e semitransparente */
+    pointer-events: none;
+    z-index: 8;
+    animation: fogMove 30s linear infinite; /* Movimenta a névoa horizontalmente */
+}
+
+.fog-layer:nth-child(2) {
+    background: rgba(169, 169, 169, 0.05); /* Camada de névoa mais leve */
+    animation: fogMove2 50s linear infinite; /* Movimenta a névoa a uma velocidade diferente */
+}
+
+@keyframes fogMove {
+    0% {
+        transform: translateX(0);
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.15; /* Varia a opacidade no meio do movimento */
+    }
+    100% {
+        transform: translateX(-20%);
+        opacity: 0.1;
+    }
+}
+
+@keyframes fogMove2 {
+    0% {
+        transform: translateX(-10%);
+        opacity: 0.05;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    100% {
+        transform: translateX(10%);
+        opacity: 0.05;
+    }
+}
