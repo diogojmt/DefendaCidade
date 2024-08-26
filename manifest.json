@@ -1,0 +1,21 @@
+{
+  "name": "Defense Tower Game",
+  "short_name": "TowerGame",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#222",
+  "theme_color": "#222",
+  "description": "Defend your city with towers against incoming enemies.",
+  "icons": [
+    {
+      "src": "icons/bombardeio_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/bombardeio_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
